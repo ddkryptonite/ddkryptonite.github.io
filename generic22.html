@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Cloud Data Pipeline for Real-Time Semiconductor Market Analysis</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">Portfolio</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">Bio</a></li>
+							<li><a href="generic9.html">Project 10</a></li>
+							<li><a href="generic10.html">Project 11</a></li>
+							<li><a href="generic11.html">Project 12</a></li>
+							<li><a href="generic12.html">Project 13</a></li>
+							<li><a href="generic13.html">Project 14</a></li> 
+							<li><a href="generic14.html">Project 15</a></li>
+							<li><a href="generic15.html">Project 16</a></li>
+							<li><a href="generic16.html">Project 17</a></li>	
+							<li><a href="generic17.html">Project 18</a></li>	
+							<li><a href="generic18.html">Project 19</a></li>
+							<li><a href="generic19.html">Project 20</a></li>
+							<li><a href="generic20.html">Project 21</a></li>
+							<li><a href="generic21.html">Project 22</a></li>
+							<li class="active"><a href="generic22.html">Project 23</a></li>							
+						</ul>
+						<ul class="icons">
+							<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+									<h2>Cloud Data Pipeline for Real-Time Semiconductor Market Analysis</h2>
+									<p>An automated cloud data pipeline to extract, transform, and visualize semiconductor market data using AWS services and Power BI.</p>
+								</header>
+
+								<p><strong>Overview:</strong></p>
+								<ul>
+									<li><strong>Objective:</strong> Build an automated cloud data pipeline to extract semiconductor market data, transform it, and visualize it in Power BI using cloud-based infrastructure.</li>
+									<li><strong>Key Focus:</strong> ETL, Data Engineering, AWS Cloud Services, Python Automation, Real-Time Data Updates.</li>
+									<li><strong>Deployment Status:</strong> Live & Scheduled via AWS Lambda & EventBridge.</li>
+								</ul>
+
+								<p><strong>Technologies Used:</strong></p>
+								<div class="table-wrapper">
+									<table>
+										<thead>
+											<tr>
+												<th>Category</th>
+												<th>Tools/Services</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Programming</td>
+												<td>Python (requests, BeautifulSoup, pandas, boto3)</td>
+											</tr>
+											<tr>
+												<td>Cloud Services</td>
+												<td>AWS Lambda, AWS S3, Amazon Redshift Serverless, AWS EC2, EventBridge</td>
+											</tr>
+											<tr>
+												<td>Database/Querying</td>
+												<td>SQL, Redshift</td>
+											</tr>
+											<tr>
+												<td>Automation</td>
+												<td>EventBridge (Scheduled Triggers), Boto3</td>
+											</tr>
+											<tr>
+												<td>Visualization</td>
+												<td>Power BI</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+
+								<p><strong>Workflow Diagram:</strong></p>
+								<div class="image main">
+									<img src="images/ETL-Live.jpg" alt="Semiconductor Data Pipeline Workflow" />
+								</div>
+
+								<p><strong>Step-by-Step Pipeline Description:</strong></p>
+								<ol>
+									<li><strong>Data Extraction (Python):</strong> Scraped semiconductor market data using requests and BeautifulSoup. Handled HTTP requests, added user-agent headers to prevent blocking, and parsed tabular data into a pandas DataFrame.</li>
+									<li><strong>Data Cleaning & Transformation (Python, Pandas):</strong> Removed null values, handled data types (e.g., dates), and formatted currency fields using custom Python functions.</li>
+									<li><strong>Data Storage (AWS S3):</strong> Uploaded cleaned CSV data to AWS S3 bucket using Boto3, leveraging S3 as a cloud storage layer in the ETL process.</li>
+									<li><strong>Automation & Scheduling (AWS Lambda + EventBridge):</strong> Deployed the ETL Python script to AWS Lambda and scheduled execution every 15 days using AWS EventBridge for real-time data ingestion.</li>
+									<li><strong>Data Warehousing (Amazon Redshift Serverless):</strong> Connected S3 data to Amazon Redshift for cloud-based querying and storage, using SQL to analyze sales trends and market growth.</li>
+									<li><strong>Visualization (Power BI):</strong> Connected Power BI to Amazon Redshift and built an interactive dashboard visualizing global semiconductor market growth, market share insights, and AI-driven demand trends.</li>
+								</ol>
+
+								<p><strong>Key Results & Insights:</strong></p>
+								<ul>
+									<li><strong>2024 Semiconductor Market:</strong> $627.6B (+19.1% YoY).</li>
+									<li><strong>AI-Specific Chips:</strong> 20% of total sales; NVIDIA holds 88% market share.</li>
+									<li><strong>Future Outlook:</strong> Projected to reach $1 trillion by 2030.</li>
+								</ul>
+
+								<div class="image main">
+									<img src="images/SemiconductorVisual.png" alt="Semiconductor Market Visualization" />
+								</div>
+
+								<p><strong>Project Impact:</strong></p>
+								<ul>
+									<li>Enabled real-time tracking of semiconductor market trends, providing actionable insights for stakeholders.</li>
+									<li>Improved decision-making by identifying key growth areas and market opportunities.</li>
+									<li>Automated the ETL process, reducing manual effort and ensuring data accuracy.</li>
+								</ul>
+
+								<ul class="actions special">
+									<li><a href="https://github.com/ddkryptonite/" class="button" target="_blank">Github Project</a></li>
+								</ul>
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section>
+							<form method="post" action="#">
+								<div class="fields">
+									<div class="field">
+										<label for="name">Name</label>
+										<input type="text" name="name" id="name" />
+									</div>
+									<div class="field">
+										<label for="email">Email</label>
+										<input type="text" name="email" id="email" />
+									</div>
+									<div class="field">
+										<label for="message">Message</label>
+										<textarea name="message" id="message" rows="3"></textarea>
+									</div>
+								</div>
+								<ul class="actions">
+									<li><input type="submit" value="Send Message" /></li>
+								</ul>
+							</form>
+						</section>
+						<section class="split contact">
+							<section class="alt">
+								<h3>Address</h3>
+								<p>Tema<br />Ghana</p>
+							</section>
+							<section>
+								<h3>Phone</h3>
+								<p><a href="#">(233) 0547712973 / (233) 0508927297</a></p>
+							</section>
+							<section>
+								<h3>Email</h3>
+								<p><a href="#">danieldogbey1000@gmail.com</a></p>
+							</section>
+							<section>
+								<h3>Social</h3>
+								<ul class="icons alt">
+									<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="https://www.github.com/ddkryptonite" class="icon brands alt fa-github" target="_blank"><span class="label">GitHub</span></a></li>
+								</ul>
+							</section>
+						</section>
+					</footer>
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
