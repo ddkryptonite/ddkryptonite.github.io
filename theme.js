@@ -234,3 +234,140 @@
     });
   });
 })();
+// Interactive data model / ERD
+(function () {
+  document.addEventListener("DOMContentLoaded", function () {
+    var canvas = document.getElementById("erd-canvas");
+    var svg = document.getElementById("erd-svg");
+    var reset = document.getElementById("erd-reset");
+    if (!canvas || !svg) return;
+
+    var relationships = [
+      ["fact_sales.date_key", "dim_date.date_key"],
+      ["fact_sales.product_key", "dim_product.product_key"],
+      ["fact_sales.location_key", "dim_location.location_key"],
+      ["fact_sales.supervisor_key", "dim_supervisor.supervisor_key"]
+    ];
+
+    function fieldEl(name) { return canvas.querySelector('[data-field="' + name + '"]'); }
+    function tableEl(name) { return canvas.querySelector('[data-table="' + name + '"]'); }
+
+    function relatedFor(field) {
+      var result = [];
+      relationships.forEach(function (pair) {
+        if (pair[0] === field) result.push(pair[1]);
+        if (pair[1] === field) result.push(pair[0]);
+      });
+      return result;
+    }
+
+    function linePoint(el, side) {
+      var r = el.getBoundingClientRect();
+      var c = canvas.getBoundingClientRect();
+      var x = r.left - c.left + r.width / 2;
+      var y = r.top - c.top + r.height / 2;
+      if (side === "left") x = r.left - c.left;
+      if (side === "right") x = r.right - c.left;
+      if (side === "top") y = r.top - c.top;
+      if (side === "bottom") y = r.bottom - c.top;
+      return {x:x, y:y};
+    }
+
+    function drawLines() {
+      svg.innerHTML = "";
+      var width = canvas.clientWidth;
+      var height = canvas.clientHeight;
+      svg.setAttribute("viewBox", "0 0 " + width + " " + height);
+      relationships.forEach(function (pair, index) {
+        var source = fieldEl(pair[0]);
+        var target = fieldEl(pair[1]);
+        if (!source || !target) return;
+        var sr = source.getBoundingClientRect();
+        var tr = target.getBoundingClientRect();
+        var cr = canvas.getBoundingClientRect();
+        var sx = sr.left + sr.width / 2 - cr.left;
+        var sy = sr.top + sr.height / 2 - cr.top;
+        var tx = tr.left + tr.width / 2 - cr.left;
+        var ty = tr.top + tr.height / 2 - cr.top;
+        var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        var midX = (sx + tx) / 2;
+        var d = "M " + sx + " " + sy + " C " + midX + " " + sy + ", " + midX + " " + ty + ", " + tx + " " + ty;
+        path.setAttribute("d", d);
+        path.setAttribute("class", "erd-line");
+        path.dataset.relationship = String(index);
+        svg.appendChild(path);
+      });
+    }
+
+    function resetView() {
+      canvas.querySelectorAll(".erd-card,.erd-field,.erd-line").forEach(function (el) {
+        el.classList.remove("is-active", "is-muted");
+      });
+    }
+
+    function highlightField(field) {
+      var connected = relatedFor(field);
+      canvas.querySelectorAll(".erd-card,.erd-field").forEach(function (el) {
+        el.classList.remove("is-active", "is-muted");
+      });
+      canvas.querySelectorAll(".erd-line").forEach(function (el) {
+        el.classList.add("is-muted");
+        el.classList.remove("is-active");
+      });
+      fieldEl(field).classList.add("is-active");
+      connected.forEach(function (name) {
+        var el = fieldEl(name);
+        if (el) el.classList.add("is-active");
+      });
+      canvas.querySelectorAll(".erd-card").forEach(function (card) {
+        var table = card.dataset.table;
+        if (table === field.split(".")[0] || connected.some(function (name) { return name.split(".")[0] === table; })) card.classList.add("is-active");
+        else card.classList.add("is-muted");
+      });
+      relationships.forEach(function (pair, index) {
+        if (pair[0] === field || pair[1] === field) {
+          var line = svg.querySelector('[data-relationship="' + index + '"]');
+          if (line) { line.classList.remove("is-muted"); line.classList.add("is-active"); }
+        }
+      });
+    }
+
+    function highlightTable(table) {
+      var activeFields = [];
+      relationships.forEach(function (pair) {
+        if (pair[0].split(".")[0] === table) activeFields.push(pair[0], pair[1]);
+        if (pair[1].split(".")[0] === table) activeFields.push(pair[1], pair[0]);
+      });
+      canvas.querySelectorAll(".erd-card,.erd-field").forEach(function (el) {
+        el.classList.remove("is-active", "is-muted");
+      });
+      canvas.querySelectorAll(".erd-line").forEach(function (el) {
+        el.classList.add("is-muted");
+        el.classList.remove("is-active");
+      });
+      canvas.querySelector('[data-table="' + table + '"]').classList.add("is-active");
+      activeFields.forEach(function (name) { var el = fieldEl(name); if (el) el.classList.add("is-active"); });
+      canvas.querySelectorAll(".erd-card").forEach(function (card) {
+        if (card.dataset.table !== table && !activeFields.some(function (name) { return name.split(".")[0] === card.dataset.table; })) card.classList.add("is-muted");
+        else card.classList.add("is-active");
+      });
+      relationships.forEach(function (pair, index) {
+        if (pair[0].split(".")[0] === table || pair[1].split(".")[0] === table) {
+          var line = svg.querySelector('[data-relationship="' + index + '"]');
+          if (line) { line.classList.remove("is-muted"); line.classList.add("is-active"); }
+        }
+      });
+    }
+
+    canvas.querySelectorAll(".erd-field").forEach(function (button) {
+      button.addEventListener("click", function () { highlightField(button.dataset.field); });
+    });
+    canvas.querySelectorAll(".erd-card-header").forEach(function (header) {
+      header.addEventListener("click", function () { highlightTable(header.closest(".erd-card").dataset.table); });
+      header.style.cursor = "pointer";
+    });
+    if (reset) reset.addEventListener("click", resetView);
+    window.addEventListener("resize", drawLines);
+    setTimeout(drawLines, 50);
+  });
+})();
