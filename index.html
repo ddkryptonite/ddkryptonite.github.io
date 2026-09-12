@@ -18,6 +18,7 @@
       <nav class="nav-links">
         <a href="index.html">Home</a>
         <a href="index.html#work">Work</a>
+        <a href="index.html#data-model">Data Model</a>
         <a href="projectvisuals.html">Visualizations</a>
         <a class="nav-cta" href="resume.html">Resume</a>
         <a href="Daniel Dogbey CV.pdf" target="_blank" rel="noopener" class="button primary" style="padding:10px 16px">Download CV</a>
@@ -80,6 +81,103 @@
             <small>Airbyte · GCP · AWS · ETL</small>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="section erd-section" id="data-model">
+      <div class="container">
+        <div class="section-head erd-intro">
+          <p class="eyebrow">Data model</p>
+          <h2>Good decisions start with good data structure</h2>
+          <p>Before a dashboard can answer the right questions, the data behind it needs to be structured correctly. A well-designed data model connects business processes, keeps metrics consistent, and makes reporting easier to scale.</p>
+        </div>
+
+        <div class="erd-value-grid">
+          <div class="erd-value-card">
+            <strong>Reliable metrics</strong>
+            <p>A consistent structure reduces conflicting numbers across reports and gives teams a dependable foundation for analysis.</p>
+          </div>
+          <div class="erd-value-card">
+            <strong>Connected information</strong>
+            <p>Sales, products, locations, supervisors, and dates can be analyzed together instead of living in disconnected reports.</p>
+          </div>
+          <div class="erd-value-card">
+            <strong>Scalable reporting</strong>
+            <p>A well-structured model makes it easier to add data and build new dashboards without rebuilding the reporting foundation.</p>
+          </div>
+        </div>
+
+        <div class="erd-instruction">
+          <p><strong>Explore the model:</strong> click a table or field to see its relationships.</p>
+          <button class="erd-reset" type="button" id="erd-reset">Reset view</button>
+        </div>
+
+        <div class="erd-shell" aria-label="Interactive electronics commerce star schema">
+          <div class="erd-canvas" id="erd-canvas">
+            <svg class="erd-svg" id="erd-svg" aria-hidden="true"></svg>
+
+            <article class="erd-card date" data-table="dim_date">
+              <div class="erd-card-header">dim_date<span>Dimension</span></div>
+              <div class="erd-fields">
+                <button class="erd-field" data-field="dim_date.date_key"><span>date_key</span><span class="erd-key">PK</span></button>
+                <button class="erd-field" data-field="dim_date.date"><span>date</span></button>
+                <button class="erd-field" data-field="dim_date.month"><span>month</span></button>
+                <button class="erd-field" data-field="dim_date.quarter"><span>quarter</span></button>
+                <button class="erd-field" data-field="dim_date.year"><span>year</span></button>
+              </div>
+            </article>
+
+            <article class="erd-card product" data-table="dim_product">
+              <div class="erd-card-header">dim_product<span>Dimension</span></div>
+              <div class="erd-fields">
+                <button class="erd-field" data-field="dim_product.product_key"><span>product_key</span><span class="erd-key">PK</span></button>
+                <button class="erd-field" data-field="dim_product.product_name"><span>product_name</span></button>
+                <button class="erd-field" data-field="dim_product.category"><span>category</span></button>
+              </div>
+            </article>
+
+            <article class="erd-card fact" data-table="fact_sales">
+              <div class="erd-card-header">fact_sales<span>Fact table</span></div>
+              <div class="erd-fields">
+                <button class="erd-field" data-field="fact_sales.date_key"><span>date_key</span><span class="erd-key">FK</span></button>
+                <button class="erd-field" data-field="fact_sales.product_key"><span>product_key</span><span class="erd-key">FK</span></button>
+                <button class="erd-field" data-field="fact_sales.location_key"><span>location_key</span><span class="erd-key">FK</span></button>
+                <button class="erd-field" data-field="fact_sales.supervisor_key"><span>supervisor_key</span><span class="erd-key">FK</span></button>
+                <button class="erd-field" data-field="fact_sales.order_id"><span>order_id</span></button>
+                <button class="erd-field" data-field="fact_sales.quantity"><span>quantity</span></button>
+                <button class="erd-field" data-field="fact_sales.sales"><span>sales</span></button>
+                <button class="erd-field" data-field="fact_sales.profit"><span>profit</span></button>
+              </div>
+            </article>
+
+            <article class="erd-card location" data-table="dim_location">
+              <div class="erd-card-header">dim_location<span>Dimension</span></div>
+              <div class="erd-fields">
+                <button class="erd-field" data-field="dim_location.location_key"><span>location_key</span><span class="erd-key">PK</span></button>
+                <button class="erd-field" data-field="dim_location.location"><span>location</span></button>
+                <button class="erd-field" data-field="dim_location.region"><span>region</span></button>
+              </div>
+            </article>
+
+            <article class="erd-card supervisor" data-table="dim_supervisor">
+              <div class="erd-card-header">dim_supervisor<span>Dimension</span></div>
+              <div class="erd-fields">
+                <button class="erd-field" data-field="dim_supervisor.supervisor_key"><span>supervisor_key</span><span class="erd-key">PK</span></button>
+                <button class="erd-field" data-field="dim_supervisor.supervisor_name"><span>supervisor_name</span></button>
+                <button class="erd-field" data-field="dim_supervisor.region"><span>region</span></button>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="erd-meta">
+          <div class="erd-legend">
+            <span><i class="erd-dot"></i> Selected relationship</span>
+            <span class="erd-relationship">1 → * one-to-many</span>
+          </div>
+          <span>Conceptual star schema for the Electronics Commerce dashboard</span>
+        </div>
+        <p class="erd-note"><strong>Why this matters:</strong> the model sits between the business question and the dashboard. It is the foundation that makes analysis consistent, explainable, and easier to extend.</p>
       </div>
     </section>
 
